@@ -1,9 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
+import styles from "./Detail.style";
 
-const Detail = () => {
+const Detail = ({ route }) => {
+  const { product } = route.params;
   return (
-    <View>
-      <Text>Detail</Text>
+    <View style={styles.container}>
+      <Image source={{ uri: product.image }} style={styles.image} />
+      <Text style={styles.title}>{product.title}</Text>
+      <Text style={styles.price}>${product.price}</Text>
+      <Text style={styles.description}>{product.description}</Text>
     </View>
   );
 };

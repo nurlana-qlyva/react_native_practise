@@ -1,36 +1,41 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import styles from "./Products.style";
 import { API_URL } from "@env";
-import { useEffect, useState } from "react";
 import ProductCard from "../../components/ProductCard";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
+import useFetch from "../../hooks/useFetch";
 
-const Products = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((res) => setData(res));
-  }, []);
+const Products = ({ navigation }) => {
+  const { loading, error, data } = useFetch(API_URL);
 
-  const renderItem = ({ item }) => {
-    return <ProductCard data={item} />;
+  const hadnleProductSelection = (id) => {
+    const findProduct = data.find((item) => item.id === id);
+    navigation.navigate("DetailScreen", { product: findProduct });
   };
 
+  const renderItem = ({ item }) => {
+    return (
+      <ProductCard
+        data={item}
+        onSelect={() => hadnleProductSelection(item.id)}
+      />
+    );
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList data={data} renderItem={renderItem} />
     </View>
   );
-};
-
-const d = {
-  category: "women's clothing",
-  description:
-    "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
-  id: 20,
-  image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
-  price: 12.99,
-  rating: { count: 145, rate: 3.6 },
-  title: "DANVOUY Womens T Shirt Casual Cotton Short",
 };
 
 export default Products;
