@@ -1,13 +1,13 @@
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import styles from "./Products.style";
-import { API_URL } from "@env";
+import { API_PRODUCT_URL } from "@env";
 import ProductCard from "../../components/ProductCard";
 import Error from "../../components/Error";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 
 const Products = ({ navigation }) => {
-  const { loading, error, data } = useFetch(API_URL);
+  const { loading, error, data } = useFetch(API_PRODUCT_URL);
 
   const hadnleProductSelection = (id) => {
     const findProduct = data.find((item) => item.id === id);

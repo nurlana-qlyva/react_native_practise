@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Products from "./pages/products";
 import Detail from "./pages/detail";
-import Login from "./pages/login/Login";
+import Login from "./pages/login";
 
 const Stack = createNativeStackNavigator();
 
