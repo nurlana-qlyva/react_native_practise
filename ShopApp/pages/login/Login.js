@@ -7,7 +7,7 @@ import Form from "./Form";
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
-const Login = () => {
+const Login = ({navigation}) => {
   const animationProgress = useRef(new Animated.Value(0));
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Login = () => {
         loop
         style={styles.animation}
       />
-      <Form />
+      <Form navigation={navigation}/>
     </View>
   );
 };

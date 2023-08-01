@@ -1,25 +1,41 @@
-import { View, TouchableWithoutFeedback, Text, Alert } from "react-native";
+import {
+  View,
+  TouchableWithoutFeedback,
+  Text,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { Formik } from "formik";
 import Input from "../../components/Input/Input";
 import styles from "./Login.style";
 import usePost from "../../hooks/usePost/usePost";
-import { API_AUTH_API } from "@env";
+import { API_AUTH_URL } from "@env";
+import { useSelector } from "react-redux";
 
-const Form = () => {
+const Form = ({ navigation }) => {
+  const state = useSelector(state => state.auth)
   const { data, loading, error, post } = usePost();
 
-  const handleSubmit = (values) => {
-    post(API_AUTH_API + '/login', values);
+  const handleLogin = (values) => {
+    post(API_AUTH_URL + "/login", values);
   };
 
   if (error) {
-    Alert.alert("Shop", "User is not found");
+    Alert.alert("Shop", "There is error");
+  }
+
+  if (data) {
+    if (data.status === "Error") {
+      Alert.alert("Shop", "User is not found");
+    } else {
+      navigation.navigate("ProductsScreen");
+    }
   }
 
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
-      onSubmit={handleSubmit}
+      onSubmit={handleLogin}
     >
       {({ handleSubmit, handleChange, values }) => {
         return (
@@ -39,9 +55,11 @@ const Form = () => {
               icon="key"
             />
             <TouchableWithoutFeedback onPress={handleSubmit}>
-              <Text style={styles.button} loading={loading}>
-                Login
-              </Text>
+              {loading ? (
+                <ActivityIndicator color="white" style={styles.button} />
+              ) : (
+                <Text style={styles.button}>Login</Text>
+              )}
             </TouchableWithoutFeedback>
           </View>
         );

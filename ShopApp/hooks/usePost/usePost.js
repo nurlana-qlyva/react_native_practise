@@ -6,14 +6,15 @@ const usePost = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const post = (url, apiData) => {
+  const post = async (url, apiData) => {
     try {
       setLoading(true);
-      const { data: responseData } = axios.post(url, apiData);
+      const { data: responseData } = await axios.post(url, apiData);
+      setLoading(false);
       setData(responseData);
     } catch (error) {
       setError(error);
-      setLoading(true);
+      setLoading(false);
     }
   };
 
