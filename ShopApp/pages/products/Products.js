@@ -1,13 +1,16 @@
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, Button } from "react-native";
 import styles from "./Products.style";
 import { API_PRODUCT_URL } from "@env";
 import ProductCard from "../../components/ProductCard";
 import Error from "../../components/Error";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/auth/authSlice";
 
 const Products = ({ navigation }) => {
   const { loading, error, data } = useFetch(API_PRODUCT_URL);
+  const dispatch = useDispatch()
 
   const hadnleProductSelection = (id) => {
     const findProduct = data.find((item) => item.id === id);
@@ -33,7 +36,7 @@ const Products = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={renderItem} />
+      <FlatList data={data} renderItem={renderItem} style={styles.list}/>
     </View>
   );
 };

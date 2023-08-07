@@ -10,26 +10,24 @@ import Input from "../../components/Input/Input";
 import styles from "./Login.style";
 import usePost from "../../hooks/usePost/usePost";
 import { API_AUTH_URL } from "@env";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../store/auth/authSlice";
 
 const Form = ({ navigation }) => {
-  const state = useSelector(state => state.auth)
   const { data, loading, error, post } = usePost();
+  const dispatch = useDispatch()
 
   const handleLogin = (values) => {
+    dispatch(setUser(data))
     post(API_AUTH_URL + "/login", values);
   };
 
   if (error) {
-    Alert.alert("Shop", "There is error");
+    Alert.alert("Shop", "User is not found");
   }
 
   if (data) {
-    if (data.status === "Error") {
-      Alert.alert("Shop", "User is not found");
-    } else {
-      navigation.navigate("ProductsScreen");
-    }
+    navigation.navigate("ProductsScreen");
   }
 
   return (
