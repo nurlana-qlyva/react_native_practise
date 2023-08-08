@@ -10,7 +10,6 @@ import { setUser } from "../../store/auth/authSlice";
 
 const Products = ({ navigation }) => {
   const { loading, error, data } = useFetch(API_PRODUCT_URL);
-  const dispatch = useDispatch()
 
   const hadnleProductSelection = (id) => {
     const findProduct = data.find((item) => item.id === id);
