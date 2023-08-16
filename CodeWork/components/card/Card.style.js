@@ -2,12 +2,9 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 10,
     flex: 1,
-    gap: 6
+    gap: 6,
+    marginBottom: 10
   },
   job: {
     fontSize: 18,

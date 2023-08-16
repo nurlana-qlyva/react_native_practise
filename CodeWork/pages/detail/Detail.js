@@ -11,7 +11,6 @@ const Detail = ({ route }) => {
   const dispatch = useDispatch();
 
   const addFavoriteJobsList = () => {
-    console.log('yes')
     dispatch(setFavoriteJob(job));
   };
 
@@ -30,11 +29,13 @@ const Detail = ({ route }) => {
         <Text style={styles.title}>Job Detail</Text>
         <HTMLView value={job.contents} style={styles.content} />
         <View style={styles.buttons}>
-          <TouchableWithoutFeedback onPress={addFavoriteJobsList}>
+          <TouchableWithoutFeedback>
             <Text style={styles.button}>Submit</Text>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>
-            <Text style={styles.button}>Favorite Job</Text>
+            <Text style={styles.button} onPress={addFavoriteJobsList}>
+              Favorite Job
+            </Text>
           </TouchableWithoutFeedback>
         </View>
       </View>

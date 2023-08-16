@@ -9,12 +9,14 @@ const FavouriteJobsSlice = createSlice({
   initialState,
   reducers: {
     setFavoriteJob: (state, { payload }) => {
-        console.log(payload)
       state.data.unshift(payload);
     },
+    setRemovingJob: (state, {payload}) => {
+      state.data = state.data.filter(item => item.id !== payload)
+    }
   },
 });
 
-export const { setFavoriteJob } = FavouriteJobsSlice.actions;
+export const { setFavoriteJob, setRemovingJob } = FavouriteJobsSlice.actions;
 
 export default FavouriteJobsSlice.reducer;
