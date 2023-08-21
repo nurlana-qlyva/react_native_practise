@@ -16,14 +16,13 @@ const Jobs = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.card_container}>
+      <View style={styles.card_container} key={item.id}>
         <Card data={item} onPress={() => goToDetail(item.id)} />
       </View>
     );
   };
 
   if (loading) {
-    console.log('loaidng')
     return <Loading />;
   }
 

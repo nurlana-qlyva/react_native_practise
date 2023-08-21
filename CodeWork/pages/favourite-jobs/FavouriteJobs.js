@@ -11,13 +11,13 @@ const FavouriteJobs = () => {
   const handleRemoveData = (id) => {
     dispatch(setRemovingJob(id))
   }
-
+  console.log(favouriteJobs)
   return (
     <View style={styles.container}>
       <FlatList
         data={favouriteJobs}
         renderItem={({ item }) => (
-          <View style={styles.card_container}>
+          <View style={styles.card_container} key={item.id}>
             <Card data={item} />
             <Button title="Remove" color={"#c11"} onPress={() => handleRemoveData(item.id)}/>
           </View>

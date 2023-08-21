@@ -1,17 +1,28 @@
-import { Button, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import HTMLView from "react-native-htmlview";
 import styles from "./Detail.style";
 import { TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setFavoriteJob } from "../../store/slices/favourite_Jobs_slice/FavouriteJobsSlice";
+import FavouriteJobsSlice, {
+  setFavoriteJob,
+} from "../../store/slices/favourite_Jobs_slice/FavouriteJobsSlice";
 
 const Detail = ({ route }) => {
   const { job } = route.params;
 
+  const favoritesJobsData = useSelector((state) => state.favourites?.data);
+
   const dispatch = useDispatch();
 
   const addFavoriteJobsList = () => {
-    dispatch(setFavoriteJob(job));
+    favoritesJobsData.length === 0
+      ? dispatch(setFavoriteJob(job))
+      : favoritesJobsData.map((item) =>
+     { console.log(item.name === job.name)
+          item.id === job.id
+            ? alert("data has been saved before")
+            : dispatch(setFavoriteJob(job))
+       } )
   };
 
   return (
