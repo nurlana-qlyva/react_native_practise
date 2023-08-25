@@ -4,16 +4,12 @@ import { useEffect, useState } from "react";
 const auth = getAuth();
 
 export const useAuthentication = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   useEffect(() => {
-    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(undefined);
-      }
-    });
+    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) =>
+      user ? setUser(user) : setUser(undefined)
+    );
 
     return unsubscribeFromAuthStatuChanged;
   }, []);

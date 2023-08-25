@@ -6,7 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const auth = getAuth();
 
-const Signin = ({ navigation }) => {
+const Signin = () => {
   const [value, setValue] = useState({
     error: "",
     email: "",
