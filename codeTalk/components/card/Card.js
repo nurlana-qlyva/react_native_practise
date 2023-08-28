@@ -4,7 +4,7 @@ import styles from "./Card.style";
 const Card = ({ data, onpress }) => {
   return (
     <Pressable style={styles.container} onPress={onpress}>
-      <Text style={styles.title}>{data?.title}</Text>
+      <Text style={styles.title}>{data}</Text>
     </Pressable>
   );
 };

@@ -2,43 +2,15 @@ import { Pressable, ScrollView, View } from "react-native";
 import styles from "./Rooms.style";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useState } from "react";
+import useFetchAllRooms from "../../hooks/useFetchAllRooms";
 
 import Card from "../../components/card";
 import ModalComponent from "../../components/modal";
 
-const rooms = [
-  {
-    id: 1,
-    title: "vue",
-  },
-  {
-    id: 2,
-    title: "react",
-  },
-  {
-    id: 3,
-    title: "phyton",
-  },
-  {
-    id: 4,
-    title: "unity",
-  },
-  {
-    id: 5,
-    title: "net",
-  },
-  {
-    id: 6,
-    title: "flutter",
-  },
-  {
-    id: 7,
-    title: "swift",
-  },
-];
-
 const Rooms = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
+
+  const rooms = useFetchAllRooms();
 
   const showModal = () => setIsVisible(true);
 
@@ -46,9 +18,9 @@ const Rooms = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.list}>
-          {rooms.map((room) => (
+          {rooms?.map((room) => (
             <Card
-              data={room}
+              data={room.name}
               onpress={() => navigation.navigate("Room", { data: room })}
             />
           ))}
@@ -58,7 +30,10 @@ const Rooms = ({ navigation }) => {
         <Icon name="plus" size={40} color="#fff" />
       </Pressable>
 
-      <ModalComponent isVisible={isVisible} onPress={() => setIsVisible(false)}/>
+      <ModalComponent
+        isVisible={isVisible}
+        onClose={() => setIsVisible(false)}
+      />
     </View>
   );
 };

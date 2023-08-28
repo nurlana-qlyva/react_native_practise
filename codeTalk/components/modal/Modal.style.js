@@ -13,13 +13,21 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: "90%",
     height: "30%",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    gap: 10
   },
   input: {
     borderColor: "#f81",
     borderWidth: 1,
     padding: 20,
-    borderRadius: 10
+    borderRadius: 10,
+    marginTop: 40
+  },
+  close_btn: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    backgroundColor: "#f77"
   },
   modalOverlay: {
     ...StyleSheet.absoluteFillObject,

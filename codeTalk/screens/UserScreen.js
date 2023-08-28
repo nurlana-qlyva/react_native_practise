@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 
 export const UserScreen = () => {
   const roomData = useSelector((state) => state.room.data);
+ 
   
   return (
     <NavigationContainer>
@@ -28,7 +29,7 @@ export const UserScreen = () => {
           options={{
             headerTintColor: "#f81",
             headerTitleAlign: "center",
-            headerTitle: roomData.title,
+            headerTitle: roomData,
           }}
         />
       </Stack.Navigator>
